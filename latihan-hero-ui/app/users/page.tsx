@@ -3,6 +3,11 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import CardList from "../components/CardList";
+import dynamic from "next/dynamic"
+
+const UserMap = dynamic(() => import("../components/UserMapTemp"), {
+  ssr: false,
+})
 
 const base_url = "https://jsonplaceholder.typicode.com/users";
 
@@ -85,9 +90,14 @@ export default function Users() {
               <p>Suite: {user.address.suite}</p>
               <p>City: {user.address.city}</p>
               <p>Zipcode: {user.address.zipcode}</p>
-              <p>
-                Geo: {user.address.geo.lat}, {user.address.geo.lng}
-              </p>
+              <div>
+  <strong>Location Map:</strong>
+  <UserMap
+    lat={parseFloat(user.address.geo.lat)}
+    lng={parseFloat(user.address.geo.lng)}
+    name={user.name}
+  />
+</div>
             </div>
 
             <p>
