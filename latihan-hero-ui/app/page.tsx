@@ -1,5 +1,4 @@
 import CardList from "./components/CardList";
-import LinkButton from "./components/LinkButtonPrimary";
 import Link from "next/link";
 import LinkButtonSecondary from "./components/LinkButtonSecondary";
 import LinkButtonSuccess from "./components/LinkButtonSuccess";
@@ -18,6 +17,9 @@ export default function Home() {
         </Link>
         <Link href="/comments">
           <LinkButtonSuccess>Explore Comments</LinkButtonSuccess>
+        </Link>
+        <Link href="/users">
+          <LinkButtonSuccess>Explore Users</LinkButtonSuccess>
         </Link>
       </CardList>
     </div>
