@@ -1,0 +1,47 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import CardList from "../components/CardList";
+import axios from "axios";
+
+const base_url = "https://jsonplaceholder.typicode.com/comments";
+
+interface Icomment {
+  postId: number;
+  id: number;
+  name: string;
+  email: string;
+  body: string;
+}
+
+export default function Comments() {
+  const [comments, setComments] = useState<Icomment[]>([]);
+
+  useEffect(() => {
+    axios
+      .get<Icomment[]>(base_url)
+      .then((response) => {
+        setComments(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
+  return (
+    <div>
+      <CardList>
+        <h1 className="text-4xl font-bold mb-8">Comments</h1>
+      </CardList>
+
+      {comments.map((comment) => (
+        <CardList key={comment.id}>
+          <p>{comment.id}</p>
+          <h2>{comment.name}</h2>
+          <h2>{comment.email}</h2>
+        </CardList>
+      ))}
+    </div>
+  );
+}
+
+
