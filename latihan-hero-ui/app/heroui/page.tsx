@@ -5,7 +5,7 @@ import CardExample from "../components/heroui/CardExample";
 import FormExample from "../components/heroui/FormExample";
 import ImageExample from "../components/heroui/ImageExample";
 import CheckBoxExample from "../components/heroui/CheckBoxExample";
-import CardList from "../components/heroui/CardList";
+import CardList from "../components/CardList";
 
 export default function HeroUi() {
   return (

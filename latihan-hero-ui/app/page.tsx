@@ -1,6 +1,8 @@
-import CardList from "./components/heroui/CardList";
-import LinkButton from "./components/LinkButton";
+import CardList from "./components/CardList";
+import LinkButton from "./components/LinkButtonPrimary";
 import Link from "next/link";
+import LinkButtonSecondary from "./components/LinkButtonSecondary";
+import LinkButtonSuccess from "./components/LinkButtonSuccess";
 
 export default function Home() {
   return (
@@ -8,10 +10,13 @@ export default function Home() {
       <CardList>
         <h1 className="text-4xl font-bold mb-8">Link</h1>
         <Link href="/heroui">
-          <LinkButton>Explore HeroUI Components</LinkButton>
+          <LinkButtonSecondary>Explore HeroUI Components</LinkButtonSecondary>
         </Link>
-        <Link href="/axios">
-          <LinkButton>Explore Axios Example</LinkButton>
+        <Link href="/posts">
+          <LinkButtonSuccess>Explore Posts</LinkButtonSuccess>
+        </Link>
+        <Link href="/comments">
+          <LinkButtonSuccess>Explore Comments</LinkButtonSuccess>
         </Link>
       </CardList>
     </div>
