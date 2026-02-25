@@ -2,10 +2,11 @@
 
 import { Button } from "@heroui/react";
 
-const LinkButton = ({ href, children }: any) => {
+
+const LinkButtonPrimary = ({ children }: any) => {
   return (
       <Button color="primary">{children} </Button>
   );
 };
 
-export default LinkButton;
+export default LinkButtonPrimary;
