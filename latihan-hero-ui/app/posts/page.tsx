@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import CardList from "../components/CardList";
 import LinkButtonDanger from "../components/LinkButtonDanger";
+import Link from "next/link";
+import LinkButtonPrimary from "../components/LinkButtonPrimary";
 
 const base_url = "https://jsonplaceholder.typicode.com/posts";
 
@@ -49,6 +51,9 @@ export default function Posts() {
     <div>
       <CardList>
         <h1 className="text-4xl font-bold mb-8">Posts</h1>
+        <Link href="/posts/create">
+          <LinkButtonPrimary>Create New Post (Formik)</LinkButtonPrimary>
+        </Link>
       </CardList>
 
       {posts.map((post) => (
