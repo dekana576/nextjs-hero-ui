@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import CardList from "../components/CardList";
 import dynamic from "next/dynamic"
+import Link from "next/link";
+import LinkButtonPrimary from "../components/LinkButtonPrimary";
 
 const UserMap = dynamic(() => import("../components/UserMapTemp"), {
   ssr: false,
@@ -66,6 +68,9 @@ export default function Users() {
     <div className="space-y-6">
       <CardList>
         <h1 className="text-3xl font-bold">Users List</h1>
+        <Link href="/users/create">
+          <LinkButtonPrimary>Create New User</LinkButtonPrimary>
+        </Link>
       </CardList>
 
       {users.map((user) => (
