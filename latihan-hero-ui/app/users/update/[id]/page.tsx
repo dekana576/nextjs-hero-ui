@@ -1,47 +1,49 @@
 "use client";
-import { Form } from "@heroui/form";
-import { Button, Input } from "@heroui/react";
+
+import CardList from "@/app/components/CardList";
+import { Button, Form, Input } from "@heroui/react";
 import axios from "axios";
+import { useParams } from "next/navigation";
 import { useState } from "react";
-import React from "react";
-import CardList from "../../components/CardList";
 
-const base_url = "https://jsonplaceholder.typicode.com/posts";
-
-export default function CreateUser() {
+export default function UpdateUser() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState<string | null>(null);
+  const params = useParams();
+  const id = params.id;
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleUpdate = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setStatus(null);
     try {
-      const response = await axios.post(base_url, {
-        username: username,
-        email: email,
-        userId: 1,
-      });
-      console.log("User created:", response.data);
+      const response = await axios.put(
+        `https://jsonplaceholder.typicode.com/posts/${id}`,
+        {
+          username: username,
+          email: email,
+          userId: id,
+        },
+      );
+      console.log("User updated:", response.data);
       setStatus("success");
-      setUsername("");
-      setEmail("");
     } catch (error) {
-      console.error("Error creating user:", error);
+      console.error("Error updating user:", error);
       setStatus("error");
     } finally {
       setLoading(false);
     }
   };
+
   return (
     <div className="w-full max-w-md mx-auto p-8">
       <CardList>
-        <h1 className="text-3xl font-bold mb-6">Create New User</h1>
+        <h1 className="text-3xl font-bold mb-6">Update User</h1>
         <Form
           className="w-full max-w-xs flex flex-col gap-4"
-          onSubmit={handleSubmit}
+          onSubmit={handleUpdate}
         >
           <Input
             isRequired
@@ -83,11 +85,11 @@ export default function CreateUser() {
             </Button>
           </div>
           {status === "success" && (
-            <p className="text-green-500 text-sm">User created successfully!</p>
+            <p className="text-green-500 text-sm">User Updated successfully!</p>
           )}
 
           {status === "error" && (
-            <p className="text-red-500 text-sm">Failed to create user.</p>
+            <p className="text-red-500 text-sm">Failed to update user.</p>
           )}
 
           {status === "reset" && (

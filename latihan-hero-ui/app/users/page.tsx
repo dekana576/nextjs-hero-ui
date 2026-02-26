@@ -6,6 +6,7 @@ import CardList from "../components/CardList";
 import dynamic from "next/dynamic"
 import Link from "next/link";
 import LinkButtonPrimary from "../components/LinkButtonPrimary";
+import LinkButtonSecondary from "../components/LinkButtonSecondary";
 
 const UserMap = dynamic(() => import("../components/UserMapTemp"), {
   ssr: false,
@@ -118,6 +119,9 @@ export default function Users() {
               <p>CatchPhrase: {user.company.catchPhrase}</p>
               <p>Business: {user.company.bs}</p>
             </div>
+            <Link href={`/users/update/${user.id}`}>
+              <LinkButtonSecondary>Update User</LinkButtonSecondary>
+            </Link>
           </div>
         </CardList>
       ))}
