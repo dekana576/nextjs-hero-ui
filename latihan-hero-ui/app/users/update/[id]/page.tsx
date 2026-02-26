@@ -20,7 +20,7 @@ export default function UpdateUser() {
     setStatus(null);
     try {
       const response = await axios.put(
-        `https://jsonplaceholder.typicode.com/posts/${id}`,
+        `https://jsonplaceholder.typicode.com/users/${id}`,
         {
           username: username,
           email: email,
