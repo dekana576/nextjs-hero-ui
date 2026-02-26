@@ -5,6 +5,7 @@ import { Formik, Form, useField } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 import { Button, Input, Textarea } from "@heroui/react";
+import { useState } from "react";
 
 const base_url = "https://jsonplaceholder.typicode.com/posts";
 
@@ -39,6 +40,11 @@ const MyTextarea = ({ label, ...props }: any) => {
 };
 
 export default function CreatePost() {
+      const [error, setError] = useState<Error | null>(null);
+    
+      if (error) {
+        throw error;
+      }
   return (
     <div className="w-full max-w-md mx-auto justify-center items-center p-8">
       <CardList>
@@ -62,9 +68,8 @@ export default function CreatePost() {
               console.log("Post created:", response.data);
               alert("Post created successfully.");
               resetForm();
-            } catch (error) {
-              console.error(error);
-              alert("Failed to create the post.");
+            } catch (err) {
+               setError(err as Error);
             }
           }}
         >

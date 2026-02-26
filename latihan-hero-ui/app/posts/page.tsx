@@ -17,6 +17,12 @@ interface Ipost {
 }
 
 export default function Posts() {
+  const [error, setError] = useState<Error | null>(null);
+
+  if (error) {
+    throw error;
+  }
+
   const [posts, setPosts] = useState<Ipost[]>([]);
 
   useEffect(() => {
@@ -25,8 +31,8 @@ export default function Posts() {
       .then((response) => {
         setPosts(response.data);
       })
-      .catch((error) => {
-        console.error(error);
+      .catch((err) => {
+        setError(err);
       });
   }, []);
 
