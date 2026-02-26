@@ -35,9 +35,10 @@ export default function Comments() {
 
       {comments.map((comment) => (
         <CardList key={comment.id}>
-          <p>{comment.id}</p>
-          <h2>{comment.name}</h2>
-          <h2>{comment.email}</h2>
+          <p><strong>ID:</strong> {comment.id}</p>
+          <h2><strong>Name:</strong> {comment.name}</h2>
+          <h2><strong>Email:</strong> {comment.email}</h2>
+          <p><strong>Body:</strong> {comment.body}</p>
         </CardList>
       ))}
     </div>
