@@ -31,6 +31,9 @@ export default function Navbar() {
           <Link href="/posts" className={linkClass("/posts")}>
             Posts
           </Link>
+          <Link href="/comments" className={linkClass("/comments")}>
+            Comments
+          </Link>
         </div>
       </div>
     </nav>
