@@ -12,6 +12,7 @@
     "@heroui/react": "^2.8.9",
     "@tailwindcss/vite": "^4.2.1",
     "axios": "^1.13.5",
+    "formik": "^2.4.9",
     "framer-motion": "^12.34.3",
     "leaflet": "^1.9.4",
     "next": "16.1.6",
