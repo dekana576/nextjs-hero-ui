@@ -3,9 +3,9 @@
 import { Button } from "@heroui/react";
 
 
-const LinkButtonSuccess = ({ children }: any) => {
+const LinkButtonSuccess = ({ children, className }: any) => {
   return (
-      <Button color="success">{children} </Button>
+      <Button color="success" className={className} >{children} </Button>
   );
 };
 

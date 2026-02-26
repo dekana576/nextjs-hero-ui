@@ -7,18 +7,21 @@ export default function Home() {
   return (
     <div className="w-full max-w-4xl mx-auto p-8 space-y-8">
       <CardList>
-        <h1 className="text-4xl font-bold mb-8">Link</h1>
+        <h1 className="text-4xl font-bold mb-8 text-center">Link</h1>
         <Link href="/heroui">
-          <LinkButtonSecondary>Explore HeroUI Components</LinkButtonSecondary>
+          <LinkButtonSecondary className="w-full">Explore HeroUI Components</LinkButtonSecondary>
         </Link>
         <Link href="/posts">
-          <LinkButtonSuccess>Explore Posts</LinkButtonSuccess>
+          <LinkButtonSuccess className="w-full">Explore Posts</LinkButtonSuccess>
         </Link>
         <Link href="/comments">
-          <LinkButtonSuccess>Explore Comments</LinkButtonSuccess>
+          <LinkButtonSuccess className="w-full">Explore Comments</LinkButtonSuccess>
         </Link>
         <Link href="/users">
-          <LinkButtonSuccess>Explore Users</LinkButtonSuccess>
+          <LinkButtonSuccess className="w-full">Explore Users</LinkButtonSuccess>
+        </Link>
+        <Link href="/albums">
+          <LinkButtonSuccess className="w-full">Explore Albums</LinkButtonSuccess>
         </Link>
       </CardList>
     </div>
