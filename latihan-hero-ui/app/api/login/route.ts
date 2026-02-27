@@ -12,5 +12,14 @@ export async function POST(req: Request) {
 
   const token = await createJwt(user)
 
-  return NextResponse.json({ token })
+  const response = NextResponse.json({ message: "Login success" })
+
+  response.cookies.set("token", token, {
+    httpOnly: true,
+    secure: false, // true kalau production https
+    path: "/",
+    maxAge: 60 * 60 * 2,
+  })
+
+  return response
 }

@@ -12,7 +12,7 @@ export default function LoginPage() {
 
   const handleLogin = async () => {
     await axios.post("/api/login", { username, role })
-    router.push("/dashboard")
+    router.push(`/${role}`)
   }
 
   return (
