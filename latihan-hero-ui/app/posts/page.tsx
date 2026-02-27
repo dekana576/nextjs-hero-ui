@@ -1,11 +1,11 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import axios from "axios";
 import CardList from "../components/CardList";
 import LinkButtonDanger from "../components/LinkButtonDanger";
 import Link from "next/link";
 import LinkButtonPrimary from "../components/LinkButtonPrimary";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 
 const base_url = "https://jsonplaceholder.typicode.com/posts";
 
@@ -17,24 +17,18 @@ interface Ipost {
 }
 
 export default function Posts() {
-  const [error, setError] = useState<Error | null>(null);
+  const queryClient = useQueryClient();
 
-  if (error) {
-    throw error;
-  }
+  const {data: posts, isLoading, isError, error} = useQuery({
+    queryKey: ["posts"],
+    queryFn: async () => {
+      const response = await axios.get<Ipost[]>(base_url);
+      return response.data;
+    }
+});
 
-  const [posts, setPosts] = useState<Ipost[]>([]);
-
-  useEffect(() => {
-    axios
-      .get<Ipost[]>(base_url)
-      .then((response) => {
-        setPosts(response.data);
-      })
-      .catch((err) => {
-        setError(err);
-      });
-  }, []);
+  if (isLoading) return <p>Loading...</p>;
+  if (isError) throw error;
 
   const handleDelete = async (id: number) => {
     const confirmDelete = window.confirm(
@@ -45,7 +39,9 @@ export default function Posts() {
     try {
       await axios.delete(`${base_url}/${id}`);
 
-      setPosts((prevPosts) => prevPosts.filter((post) => post.id !== id));
+      queryClient.setQueryData(["posts"], (prevPosts: any) => {
+        return prevPosts.filter((post: any) => post.id !== id);
+      });
       alert("Post deleted successfully.");
       console.log(`Post with id ${id} deleted successfully.`);
     } catch (error) {
@@ -62,7 +58,7 @@ export default function Posts() {
         </Link>
       </CardList>
 
-      {posts.map((post) => (
+      {posts?.map((post) => (
         <CardList key={post.id}>
           <p>{post.id}</p>
           <h2>{post.title}</h2>

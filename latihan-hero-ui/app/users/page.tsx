@@ -1,12 +1,12 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import axios from "axios";
 import CardList from "../components/CardList";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import LinkButtonPrimary from "../components/LinkButtonPrimary";
 import LinkButtonSecondary from "../components/LinkButtonSecondary";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 
 const UserMap = dynamic(() => import("../components/UserMapTemp"), {
   ssr: false,
@@ -45,25 +45,18 @@ interface Iuser {
 }
 
 export default function Users() {
-  const [users, setUsers] = useState<Iuser[]>([]);
-  const [loading, setLoading] = useState(true);
+  const queryClient = useQueryClient();
 
-  useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        const response = await axios.get<Iuser[]>(base_url);
-        setUsers(response.data);
-      } catch (error) {
-        console.error(error);
-      } finally {
-        setLoading(false);
-      }
-    };
+  const {data: users, isLoading, isError, error} = useQuery({
+    queryKey: ["users"],
+    queryFn: async () => {
+      const response = await axios.get<Iuser[]>(base_url);
+      return response.data;
+    }
+});
 
-    fetchUsers();
-  }, []);
-
-  if (loading) return <p>Loading...</p>;
+  if (isLoading) return <p>Loading...</p>;
+  if (isError) throw error;
 
   return (
     <div className="space-y-6">
@@ -74,7 +67,7 @@ export default function Users() {
         </Link>
       </CardList>
 
-      {users.map((user) => (
+      {users?.map((user) => (
         <CardList key={user.id}>
           <div className="space-y-2">
             <p>
