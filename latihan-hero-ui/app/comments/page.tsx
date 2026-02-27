@@ -47,7 +47,7 @@ export default function Comments() {
         <h1 className="text-4xl font-bold mb-8">Comments</h1>
       </CardList>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 px-10 mx-10">
         {currentComments?.map((comment) => (
           <CardList key={comment.id}>
             <p>
