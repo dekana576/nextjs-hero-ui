@@ -2,6 +2,7 @@ import CardList from "./components/CardList";
 import Link from "next/link";
 import LinkButtonSecondary from "./components/LinkButtonSecondary";
 import LinkButtonSuccess from "./components/LinkButtonSuccess";
+import LinkButtonPrimary from "./components/LinkButtonPrimary";
 
 export default function Home() {
   return (
@@ -22,6 +23,9 @@ export default function Home() {
         </Link>
         <Link href="/albums">
           <LinkButtonSuccess className="w-full">Explore Albums</LinkButtonSuccess>
+        </Link>
+        <Link href="/login">
+          <LinkButtonPrimary className="w-full">Login</LinkButtonPrimary>
         </Link>
       </CardList>
     </div>

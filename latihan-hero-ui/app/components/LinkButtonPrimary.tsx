@@ -3,9 +3,9 @@
 import { Button } from "@heroui/react";
 
 
-const LinkButtonPrimary = ({ children }: any) => {
+const LinkButtonPrimary = ({ children, className }: any) => {
   return (
-      <Button color="primary">{children} </Button>
+      <Button color="primary" className={className}>{children} </Button>
   );
 };
 
