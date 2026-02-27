@@ -6,6 +6,8 @@ import LinkButtonDanger from "../components/LinkButtonDanger";
 import Link from "next/link";
 import LinkButtonPrimary from "../components/LinkButtonPrimary";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { Pagination } from "@heroui/react";
+import { useState } from "react";
 
 const base_url = "https://jsonplaceholder.typicode.com/posts";
 
@@ -17,6 +19,9 @@ interface Ipost {
 }
 
 export default function Posts() {
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
+
   const queryClient = useQueryClient();
 
   const {data: posts, isLoading, isError, error} = useQuery({
@@ -49,6 +54,11 @@ export default function Posts() {
       alert("Failed to delete the post. Please try again.");
     }
   };
+
+  const totalPages = Math.ceil((posts?.length || 0) / itemsPerPage);
+  const start = (currentPage - 1) * itemsPerPage;
+  const end = start + itemsPerPage;
+  const currentPosts = posts?.slice(start, end);
   return (
     <div>
       <CardList>
@@ -58,7 +68,7 @@ export default function Posts() {
         </Link>
       </CardList>
 
-      {posts?.map((post) => (
+      {currentPosts?.map((post) => (
         <CardList key={post.id}>
           <p>{post.id}</p>
           <h2>{post.title}</h2>
@@ -68,6 +78,16 @@ export default function Posts() {
           </LinkButtonDanger>
         </CardList>
       ))}
+      <div className="flex justify-center my-6">
+          <Pagination
+            total={totalPages}
+            page={currentPage}
+            onChange={setCurrentPage}
+            showControls
+            isCompact
+            color="secondary"
+          />
+        </div>
     </div>
   );
 }
