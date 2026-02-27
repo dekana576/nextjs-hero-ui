@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import CardList from "../components/CardList";
 import axios from "axios";
 
+
 const base_url = "https://jsonplaceholder.typicode.com/comments";
 
 interface Icomment {
@@ -33,6 +34,7 @@ export default function Comments() {
         <h1 className="text-4xl font-bold mb-8">Comments</h1>
       </CardList>
 
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
       {comments.map((comment) => (
         <CardList key={comment.id}>
           <p>
@@ -49,6 +51,7 @@ export default function Comments() {
           </p>
         </CardList>
       ))}
+      </div>
     </div>
   );
 }
